@@ -1,0 +1,33 @@
+@()(implicit req: RequestHeader)
+
+@scripts = {
+    <script type="text/jsx" src="@routes.Assets.at("javascripts/cart.js")"></script>
+    <script type="text/jsx">
+        /** @@jsx React.DOM */
+        React.renderComponent(<ShoppingCart />, document.getElementById("content"));
+    </script>
+}
+
+@main("e-Commerce Prototype", scripts) {
+    @helper.javascriptRouter("jsRoutes")(
+        routes.javascript.Application.getCartItems
+    )
+    
+    <div class="container">
+        <h3>Shopping Cart</h3>
+        <h5>e-Commerce Prototype</h5>
+        <hr />
+        
+        <p class="text-right">
+            <a 
+                href="@routes.Application.index()"
+                class="btn btn-default btn-sm"
+                title="Continue shopping"
+                data-toggle="tooltip">
+                
+                <span class="glyphicon glyphicon-home"></span>
+            </a>
+        </p>
+        <div id="content"></div>
+    </div>
+}
